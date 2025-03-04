@@ -1,4 +1,3 @@
-
 {
   "compilerOptions": {
     "resolveJsonModule": true,
@@ -21,10 +20,8 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "types": ["multer","jest","express","node"]
-    
+    "types": ["multer", "jest", "express", "node"]
   },
-  "include": ["src/**/*.ts"],
-  "custom.d.ts": ["src/types.d.ts"],
+  "include": ["src/**/*.ts", "src/types.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
