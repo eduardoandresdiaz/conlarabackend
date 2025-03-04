@@ -1,0 +1,121 @@
+Entidades y Relaciones
+Usuario:
+
+Atributos:
+id_usuario (PK)
+nombre
+email (único)
+telefono
+direccion
+contraseña
+es_admin (booleano)
+Estado de la Cuenta: Activa, suspendida, pendiente de verificación.
+Relaciones:
+Un usuario puede tener muchas órdenes de compra (1:N).
+Producto:
+
+Atributos:
+id_producto (PK)
+codigo
+nombre
+descripción
+fecha_de_publicacion
+fecha_de_caducidad
+garantia
+politicas_de_devolucion
+especificaciones_tecnicas
+proveedor
+categoria
+subCategoria
+estado
+precio
+stock
+imagen_url
+Relaciones:
+Un producto puede estar en muchos detalles de compra (1:N).
+Orden de Compra:
+
+Atributos:
+id_orden (PK)
+fecha
+total
+id_usuario (FK)
+Relaciones:
+Una orden pertenece a un usuario (N:1).
+Una orden puede tener muchos detalles de compra (1:N).
+Detalle de Compra:
+
+Atributos:
+id_detalle (PK)
+id_orden (FK)
+id_producto (FK)
+cantidad
+subtotal
+Relaciones:
+Un detalle de compra pertenece a una orden (N:1).
+Un detalle de compra está asociado a un producto (N:1).
+Relaciones Clave
+Usuario ↔ Orden de Compra: Relación 1:N.
+Orden de Compra ↔ Detalle de Compra: Relación 1:N.
+Detalle de Compra ↔ Producto: Relación N:1.
+
+
+
+En el contexto de desarrollo de aplicaciones (como un e-commerce), **Users** y **Auth** se refieren a conceptos relacionados con la gestión de usuarios y la autenticación. Aquí te explico cada uno:
+
+---
+
+### **Users (Usuarios)**
+**Users** se refiere a la entidad o modelo que representa a los usuarios dentro del sistema. Contiene toda la información necesaria sobre los usuarios registrados, como sus datos personales, preferencias, actividad, etc.
+
+#### **Funciones principales de Users:**
+1. **Registro**: Permitir que nuevos usuarios creen una cuenta proporcionando datos como nombre, correo y contraseña.
+2. **Gestión de perfiles**: Los usuarios pueden ver y editar su información, como dirección, foto de perfil, etc.
+3. **Roles y permisos**: Distinguir entre tipos de usuarios (por ejemplo, cliente, administrador, vendedor).
+4. **Relaciones con otras entidades**:
+   - Órdenes de compra realizadas.
+   - Productos creados (si son vendedores).
+   - Historial de actividades.
+
+---
+
+### **Auth (Autenticación)**
+**Auth** es el sistema o módulo que gestiona cómo los usuarios acceden de forma segura a la aplicación. Se asegura de que solo las personas autorizadas puedan interactuar con el sistema y protege los datos de los usuarios.
+
+#### **Funciones principales de Auth:**
+1. **Inicio de sesión (Login)**:
+   - Verifica la identidad del usuario mediante credenciales (correo y contraseña, por ejemplo).
+   - Puede incluir autenticación de dos factores (2FA) para mayor seguridad.
+2. **Registro (Sign up)**:
+   - Permite a nuevos usuarios crear una cuenta en el sistema.
+3. **Autorización (Authorization)**:
+   - Define qué recursos o acciones están permitidos para cada usuario según su rol.
+   - Por ejemplo, los administradores pueden agregar productos, pero los clientes no.
+4. **Gestión de sesiones**:
+   - Controla cuánto tiempo permanece activo un usuario en la aplicación.
+   - Puede usar tokens como JWT (JSON Web Token) para sesiones sin estado.
+5. **Recuperación de contraseña**:
+   - Ayuda a los usuarios a restablecer su contraseña si la olvidan.
+6. **Cierre de sesión (Logout)**:
+   - Finaliza la sesión activa del usuario de forma segura.
+
+---
+
+### **Relación entre Users y Auth**
+- **Users** almacena la información de los usuarios.
+- **Auth** maneja cómo estos usuarios se autentican y acceden a los recursos.
+  
+Por ejemplo:
+1. Un usuario registrado en la tabla `Users` inicia sesión mediante `Auth`.
+2. Auth verifica sus credenciales y le proporciona un token o una sesión activa.
+3. Según el rol definido en `Users`, Auth permite o deniega acceso a ciertas funcionalidades.
+
+---
+
+### **Implementación**
+En la práctica, estos conceptos suelen combinarse en sistemas como:
+- **Auth0**: Servicio externo para autenticación.
+- **Firebase Authentication**: Solución de Google para gestionar usuarios y sesiones.
+- **Passport.js**: Middleware para Node.js que facilita la autenticación.
+
+¿Te interesa que detallemos cómo implementar Users y Auth en tu proyecto? 
